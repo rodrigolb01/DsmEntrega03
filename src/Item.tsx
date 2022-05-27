@@ -1,20 +1,43 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Linking } from 'react-native';
 import PersonIcon from '@mui/icons-material/Person';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import LinkIcon from '@mui/icons-material/Link';
 
+import { Icon } from 'react-native-elements';
+
+
 export default function Item(props : any) {
     return (
         <View key={props.key} style={styles.item}>
-             <Text key={props.key}>
-                <PersonIcon></PersonIcon> {props.author}
+            <Text>
+                <Icon
+                    tvParallaxProperties={""}
+                    name='person-outline'
+                    type='ionicon'
+                    color='#517fa4'
+                />
+                {props.author}
             </Text>
-            <Text key={props.key}>
-               <MenuBookIcon></MenuBookIcon> {props.title}
+            <Text>
+                <Icon
+                    tvParallaxProperties={""}
+                    name='book-outline'
+                    type='ionicon'
+                    color='#517fa4'
+                />
+               {props.title}
+            </Text >
+            <Text
+            style={{color: "blue"}}
+            onPress={() => {Linking.openURL(props.url)}}>
+                <Icon
+                    tvParallaxProperties={""}
+                    name='link-outline'
+                    type='ionicon'
+                    color='#517fa4'
+                />
+                {props.url}
             </Text>
-            <a href={props.url}>
-                <LinkIcon></LinkIcon> {props.url}
-            </a>
         </View>
     )
 }

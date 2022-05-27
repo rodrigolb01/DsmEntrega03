@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Button, TextInput } from 'react-native';
 import { useState, useEffect } from 'react';
 import Item from './src/Item';
-import SearchIcon from '@mui/icons-material/Search';
+import { Icon } from 'react-native-elements';
 
 export default function App() {
   const [list, setList] = useState([]);
@@ -10,6 +10,7 @@ export default function App() {
 
   const onKeywordChange = (event : any) => {
     setKeyword(event.target.value)
+    console.log(event.target.value);
   }
 
   const fetchData = async () => {
@@ -21,17 +22,22 @@ export default function App() {
   
   return (
     <View style={styles.container}>
-      <h3>News</h3>
+      <Text>News</Text>
       <View style={styles.searchBar}>
-       <input type={'text'} value={keyword} onChange={onKeywordChange}></input>
-       <SearchIcon></SearchIcon>
+       <TextInput value={keyword} onChangeText={text => setKeyword(text)} placeholder="search keyword"></TextInput>
+       <Icon
+        tvParallaxProperties={""}
+        name='search'
+        type='ionicon'
+        color='#517fa4'
+      />
       </View>
       <Button disabled={keyword === '' || keyword === undefined ? true : false} title='Search' onPress={fetchData}></Button>
-      <div>
+      <ScrollView>
         {list?.map((item: any) => 
           <Item key={item.objectID} author={item.author} title={item.title} url={item.url}></Item>
         )}
-      </div>
+      </ScrollView>
       <StatusBar style="auto" />
     </View>
   );
@@ -43,6 +49,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    
   },
   searchBar: {
     flexDirection: 'row',
