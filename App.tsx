@@ -8,11 +8,6 @@ export default function App() {
   const [list, setList] = useState([]);
   const [keyword, setKeyword] = useState('');
 
-  const onKeywordChange = (event : any) => {
-    setKeyword(event.target.value)
-    console.log(event.target.value);
-  }
-
   const fetchData = async () => {
     await fetch(`https://hn.algolia.com/api/v1/search?query=${keyword}`)
     .then(res => res.json())

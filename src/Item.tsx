@@ -1,4 +1,5 @@
-import { StyleSheet, Text, View, Linking } from 'react-native';
+import { useState } from 'react';
+import { StyleSheet, Text, View, Linking, TouchableOpacity } from 'react-native';
 import PersonIcon from '@mui/icons-material/Person';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import LinkIcon from '@mui/icons-material/Link';
@@ -6,7 +7,13 @@ import LinkIcon from '@mui/icons-material/Link';
 import { Icon } from 'react-native-elements';
 
 
-export default function Item(props : any) {
+export default function Item(props: any) {
+
+    const [rating, setRating] = useState(0);
+    const onRatingChange = () => {
+        setRating(rating + 1)
+    }
+
     return (
         <View key={props.key} style={styles.item}>
             <Text>
@@ -25,11 +32,11 @@ export default function Item(props : any) {
                     type='ionicon'
                     color='#517fa4'
                 />
-               {props.title}
+                {props.title}
             </Text >
             <Text
-            style={{color: "blue"}}
-            onPress={() => {Linking.openURL(props.url)}}>
+                style={{ color: "blue" }}
+                onPress={() => { Linking.openURL(props.url) }}>
                 <Icon
                     tvParallaxProperties={""}
                     name='link-outline'
@@ -38,12 +45,39 @@ export default function Item(props : any) {
                 />
                 {props.url}
             </Text>
+            <Text>
+                Rating:
+                <TouchableOpacity onPress={onRatingChange}>
+                    <View style={{flexDirection : "row"}}>
+                        {rating >= 1 ? (
+                            <Icon type='ionicon' name='star' tvParallaxProperties={''}></Icon> ) : (
+                            <Icon type='ionicon' name='star-outline' tvParallaxProperties={''}></Icon> )
+                        }
+                        {rating >= 2 ? (
+                            <Icon type='ionicon' name='star' tvParallaxProperties={''}></Icon> ) : (
+                            <Icon type='ionicon' name='star-outline' tvParallaxProperties={''}></Icon> )
+                        }
+                        {rating >= 3 ? (
+                            <Icon type='ionicon' name='star' tvParallaxProperties={''}></Icon> ) : (
+                            <Icon type='ionicon' name='star-outline' tvParallaxProperties={''}></Icon> )
+                        }
+                        {rating >= 4 ? (
+                            <Icon type='ionicon' name='star' tvParallaxProperties={''}></Icon> ) : (
+                            <Icon type='ionicon' name='star-outline' tvParallaxProperties={''}></Icon> )
+                        }
+                        {rating >= 5 ? (
+                            <Icon type='ionicon' name='star' tvParallaxProperties={''}></Icon> ) : (
+                            <Icon type='ionicon' name='star-outline' tvParallaxProperties={''}></Icon> )
+                        }
+                    </View>
+                </TouchableOpacity>
+            </Text>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    item : {
+    item: {
         backgroundColor: '#59a6a1',
         borderRadius: 5,
         padding: 5,
