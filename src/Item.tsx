@@ -1,9 +1,5 @@
 import { useState } from 'react';
 import { StyleSheet, Text, View, Linking, TouchableOpacity } from 'react-native';
-import PersonIcon from '@mui/icons-material/Person';
-import MenuBookIcon from '@mui/icons-material/MenuBook';
-import LinkIcon from '@mui/icons-material/Link';
-
 import { Icon } from 'react-native-elements';
 
 
