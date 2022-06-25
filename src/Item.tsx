@@ -1,17 +1,19 @@
 import { useState } from 'react';
 import { StyleSheet, Text, View, Linking, TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements';
+import { DeleteOne } from '../redux/actions';
+import { useDispatch } from 'react-redux';
 
 
 export default function Item(props: any) {
-
+    const dispatch = useDispatch();
     const [rating, setRating] = useState(0);
     const onRatingChange = () => {
         setRating(rating + 1)
     }
 
     return (
-        <View key={props.key} style={styles.item}>
+        <View style={styles.item}>
             <Text>
                 <Icon
                     tvParallaxProperties={""}
@@ -65,6 +67,18 @@ export default function Item(props: any) {
                             <Icon type='ionicon' name='star' tvParallaxProperties={''}></Icon> ) : (
                             <Icon type='ionicon' name='star-outline' tvParallaxProperties={''}></Icon> )
                         }
+                    </View>
+                </TouchableOpacity>
+            </Text>
+            <Text>
+                Delete
+                <TouchableOpacity onPress={()=>{dispatch(DeleteOne(props.identifier))}}>
+                    <View style={
+                        {backgroundColor: 'red',
+                        width: "100",
+                        height: "20"}
+                    }>
+                        <Text>hey hey</Text>
                     </View>
                 </TouchableOpacity>
             </Text>

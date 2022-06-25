@@ -21,7 +21,8 @@ export default function PostsList() {
     await fetch(`https://hn.algolia.com/api/v1/search?query=${keyword}`)
     .then(res => res.json())
     .then(data => data.hits)
-    .then(data => dispatch(SetList(data)));
+    .then(data => dispatch(SetList(data)))
+    .then(data => console.log(data));
   }
   
   return (
@@ -40,7 +41,7 @@ export default function PostsList() {
         <Button disabled={keyword === '' || keyword === undefined ? true : false} title='Search' onPress={fetchData}></Button>
         <ScrollView>
           {posts?.map((item: any) =>
-            <Item key={item.objectID} author={item.author} title={item.title} url={item.url}></Item> 
+            <Item key={item.objectID} identifier={item.objectID} author={item.author} title={item.title} url={item.url}></Item> 
           )}
         </ScrollView>
         <StatusBar style="auto" />
